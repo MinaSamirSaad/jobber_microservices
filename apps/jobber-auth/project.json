@@ -7,20 +7,14 @@
   "targets": {
     "build": {
       "executor": "nx:run-commands",
-      "dependsOn": [
-        "generate-types"
-      ],
+      "dependsOn": ["generate-types"],
       "options": {
         "command": "webpack-cli build",
-        "args": [
-          "node-env=production"
-        ]
+        "args": ["node-env=production"]
       },
       "configurations": {
         "development": {
-          "args": [
-            "node-env=development"
-          ]
+          "args": ["node-env=development"]
         }
       }
     },
@@ -28,12 +22,10 @@
       "continuous": true,
       "executor": "@nx/js:node",
       "defaultConfiguration": "development",
-      "dependsOn": [
-        "build"
-      ],
+      "dependsOn": ["build"],
       "options": {
         "buildTarget": "jobber-auth:build",
-        "runBuildTargetDependencies": false
+        "runBuildTargetDependencies": true
       },
       "configurations": {
         "development": {
@@ -47,7 +39,8 @@
     "test": {
       "options": {
         "passWithNoTests": true
-      }
+      },
+      "dependsOn": ["generate-types"]
     },
     "generate-types": {
       "command": "prisma generate",
