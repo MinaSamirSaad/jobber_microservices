@@ -18,4 +18,8 @@ export class UsersService {
   async getUsers() {
     return this.prismaService.user.findMany();
   }
+
+  async getUserByEmail(email: string) {
+    return this.prismaService.user.findUniqueOrThrow({ where: { email } });
+  }
 }
