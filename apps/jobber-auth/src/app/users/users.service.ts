@@ -19,7 +19,7 @@ export class UsersService {
     return this.prismaService.user.findMany();
   }
 
-  async getUserByEmail(email: string) {
-    return this.prismaService.user.findUniqueOrThrow({ where: { email } });
+  async getUserByEmail(args: Prisma.UserWhereUniqueInput) {
+    return this.prismaService.user.findUniqueOrThrow({ where: args });
   }
 }

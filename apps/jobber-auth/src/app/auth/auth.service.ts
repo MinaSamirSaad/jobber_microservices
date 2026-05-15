@@ -19,8 +19,8 @@ export class AuthService {
   async login(loginInput: LoginInput, res: Response) {
     const user = await this.verifyUser(loginInput.email, loginInput.password);
     const expires = new Date();
-    expires.setMinutes(
-      expires.getMinutes() +
+    expires.setMilliseconds(
+      expires.getMilliseconds() +
         parseInt(this.configService.getOrThrow('JWT_EXPIRATION_MS'))
     );
     const tokenPayload: TokenPayload = { userId: user.id };
@@ -35,7 +35,7 @@ export class AuthService {
 
   private async verifyUser(email: string, password: string) {
     try {
-      const user = await this.usersService.getUserByEmail(email);
+      const user = await this.usersService.getUserByEmail({ email });
       const isPasswordValid = await compare(password, user.password);
       if (!isPasswordValid) {
         throw new UnauthorizedException('Invalid credentials');
