@@ -34,6 +34,9 @@ jobs:
       - name: Setup protoc
         uses: arduino/setup-protoc@v3.0.0
 
+      - name: Install pnpm
+        run: npm install -g pnpm
+
       - run: pnpm install --no-frozen-lockfile
       - uses: nrwl/nx-set-shas@v4
 
