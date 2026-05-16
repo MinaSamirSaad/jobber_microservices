@@ -35,7 +35,7 @@ export class AuthService {
 
   private async verifyUser(email: string, password: string) {
     try {
-      const user = await this.usersService.getUserByEmail({ email });
+      const user = await this.usersService.getUser({ email });
       const isPasswordValid = await compare(password, user.password);
       if (!isPasswordValid) {
         throw new UnauthorizedException('Invalid credentials');
